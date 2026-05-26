@@ -1,0 +1,16 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Common Commands
+- Install dependencies: `npm install`
+- Start development server: `npm run dev`
+- Build for production: `npm run build`
+- Lint codebase: `npm run lint`
+- Preview production build: `npm run preview`
+
+## Architecture
+- **Frontend**: React application bundled with Vite.
+- **Entry Point**: `src/main.jsx` renders the `App` component.
+- **Root Component**: `src/App.jsx` contains the main application logic and UI.
+- **Styling**: Global styles in `src/index.css` and component-specific styles in `src/App.css`.

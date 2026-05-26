@@ -12,5 +12,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Architecture
 - **Frontend**: React application bundled with Vite.
 - **Entry Point**: `src/main.jsx` renders the `App` component.
-- **Root Component**: `src/App.jsx` contains the main application logic and UI.
+- **Component Structure**:
+  - `src/App.jsx`: Main container that manages global state (transactions, categories) and coordinates child components.
+  - `src/components/Summary.jsx`: Displays calculated income, expenses, and balance.
+  - `src/components/TransactionForm.jsx`: Form for adding new transactions.
+  - `src/components/TransactionList.jsx`: Displays and filters the list of transactions.
 - **Styling**: Global styles in `src/index.css` and component-specific styles in `src/App.css`.

@@ -28,7 +28,7 @@ const CategoryChart = ({ transactions }) => {
   }
 
   return (
-    <div className="category-chart-container" style={{ marginTop: '2rem', padding: '1rem', background: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+    <div className="category-chart-container">
       <h3>Spending by Category</h3>
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={data}>

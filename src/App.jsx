@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Summary from './components/Summary'
 import TransactionForm from './components/TransactionForm'
 import TransactionList from './components/TransactionList'
@@ -6,6 +6,7 @@ import CategoryChart from './components/CategoryChart'
 import './App.css'
 
 function App() {
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
   const [transactions, setTransactions] = useState([
     { id: 1, description: "Salary", amount: 5000, type: "income", category: "salary", date: "2025-01-01" },
     { id: 2, description: "Rent", amount: 1200, type: "expense", category: "housing", date: "2025-01-02" },
@@ -19,6 +20,15 @@ function App() {
 
   const categories = ["food", "housing", "utilities", "transport", "entertainment", "salary", "other"];
 
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
+
   const addTransaction = (transaction) => {
     setTransactions([...transactions, { ...transaction, id: Date.now() }]);
   };
@@ -30,14 +40,23 @@ function App() {
   };
 
   return (
-    <div className="app">
-      <h1>Finance Tracker</h1>
-      <p className="subtitle">Track your income and expenses</p>
+    <div className="app-container">
+      <div className="app-header">
+        <div className="brand">
+          <h1>Finance Tracker</h1>
+          <p className="subtitle">Precision wealth management</p>
+        </div>
+        <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+          {theme === 'light' ? '🌙' : '☀️'}
+        </button>
+      </div>
 
-      <Summary transactions={transactions} />
-      <CategoryChart transactions={transactions} />
-      <TransactionForm onAddTransaction={addTransaction} categories={categories} />
-      <TransactionList transactions={transactions} categories={categories} onDeleteTransaction={deleteTransaction} />
+      <main className="app-content">
+        <Summary transactions={transactions} />
+        <CategoryChart transactions={transactions} />
+        <TransactionForm onAddTransaction={addTransaction} categories={categories} />
+        <TransactionList transactions={transactions} categories={categories} onDeleteTransaction={deleteTransaction} />
+      </main>
     </div>
   );
 }

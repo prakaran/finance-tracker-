@@ -22,6 +22,12 @@ function App() {
     setTransactions([...transactions, { ...transaction, id: Date.now() }]);
   };
 
+  const deleteTransaction = (id) => {
+    if (window.confirm("Are you sure you want to delete this transaction?")) {
+      setTransactions(transactions.filter(t => t.id !== id));
+    }
+  };
+
   return (
     <div className="app">
       <h1>Finance Tracker</h1>
@@ -29,7 +35,7 @@ function App() {
 
       <Summary transactions={transactions} />
       <TransactionForm onAddTransaction={addTransaction} categories={categories} />
-      <TransactionList transactions={transactions} categories={categories} />
+      <TransactionList transactions={transactions} categories={categories} onDeleteTransaction={deleteTransaction} />
     </div>
   );
 }
